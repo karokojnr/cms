@@ -17,7 +17,7 @@ const app = express();
 
 
 mongoose.Promise = global.Promise;
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 mongoose.set('useCreateIndex', true)
 mongoose.connect( mongodbUrl, { useNewUrlParser: true })
