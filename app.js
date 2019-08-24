@@ -37,7 +37,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
     store: new MongoStore({
-      url: process.env.MONGODB_DEV,
+      url: 'mongodb://karokojnr:karokojnr@cluster0-shard-00-00-ubthk.gcp.mongodb.net:27017,cluster0-shard-00-01-ubthk.gcp.mongodb.net:27017,cluster0-shard-00-02-ubthk.gcp.mongodb.net:27017/cms',
       autoReconnect: true,
     })  
 }));
