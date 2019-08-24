@@ -37,7 +37,7 @@ app.use(session({
     secret: 'karokojnr',
     cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
     store: new MongoStore({
-      url: 'mongodb+srv://karokojnr:karokojnr@cluster0-ubthk.gcp.mongodb.net/test?retryWrites=true&w=majority',
+      url: 'mongodb+srv://karokojnr:karokojnr@cluster0-ubthk.gcp.mongodb.net/cms',
       autoReconnect: true,
     })  
 }));
