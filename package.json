@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start": "node app.js"
   },
   "author": "karoko|jnr|",
   "license": "ISC",
