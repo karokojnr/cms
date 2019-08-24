@@ -4,8 +4,6 @@
   "description": "CMS",
   "main": "app.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
     "start": "node app.js"
   },
   "author": "karoko|jnr|",
