@@ -4,7 +4,10 @@
   "description": "CMS",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "dev": "node app.js",
+    "build": "next build",
+    "postinstall": "npm run build",
+    "start": "NODE_ENV=production node app.js"
   },
   "author": "karoko|jnr|",
   "license": "ISC",
