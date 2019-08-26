@@ -41,13 +41,13 @@ module.exports = {
         }
         return output;
 
-    },
-    trimString : function(passedString){
+    // },
+    // trimString : function(passedString){
         
-        var theString = passedString.substring(0, 100);
-        return theString;
+    //     var theString = passedString.substring(0, 100);
+    //     return theString;
 
-    }
+    // }
 
 
 

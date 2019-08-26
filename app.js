@@ -3,8 +3,7 @@ const chalk = require('chalk');
 //const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
-const handlebars = require('handlebars');
-const helpers = require('handlebars-helpers')();
+const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require ('body-parser');
 const methodOverride = require('method-override');
@@ -14,9 +13,20 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 const { mongodbUrl } = require('./config/database');
-//const multer = require('multer');
-//const upload = multer({ dest: path.join(__dirname, 'public/uploads')});
+const multer = require('multer');
 const app = express();
+
+const multerConf = {
+    store : multer.diskStorage({
+        destination : function(req,res,next){
+            next(null,'./public/uploads');
+        },
+        filename: function(req,file,next){
+            console.log(file);
+        }
+    })
+   
+}
 
 
 
@@ -83,12 +93,8 @@ app.use('/admin/comments',comments);
 
 const {select, generateTime,paginate,trimString} = require('./helpers/handlebars-helpers');
 //Set View Engine
-app.engine('handlebars', handlebars({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
+app.engine('handlebars', exphbs({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
 app.set('view engine', 'handlebars');
-Handlebars.registerHelper('trimString', function(passedString) {
-    var theString = passedString.substring(0,150);
-    return new Handlebars.SafeString(theString)
-});
 
 
 
