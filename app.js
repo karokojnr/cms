@@ -13,20 +13,20 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 const { mongodbUrl } = require('./config/database');
-const multer = require('multer');
+//const multer = require('multer');
 const app = express();
 
-const multerConf = {
-    store : multer.diskStorage({
-        destination : function(req,res,next){
-            next(null,'./public/uploads');
-        },
-        filename: function(req,file,next){
-            console.log(file);
-        }
-    })
+// const multerConf = {
+//     store : multer.diskStorage({
+//         destination : function(req,res,next){
+//             next(null,'./public/uploads');
+//         },
+//         filename: function(req,file,next){
+//             console.log(file);
+//         }
+//     })
    
-}
+// }
 
 
 
