@@ -65,7 +65,7 @@ app.use((req,res,next)=>{
     res.locals.error = req.flash('error');
     next();
 });
-Handlebars.registerHelper('trimString', function(passedString){
+exphbs.registerHelper('trimString', function(passedString){
     var theString = passedString.substring(0,100);
     return new Handlebars.SafeString(theString);
 });
