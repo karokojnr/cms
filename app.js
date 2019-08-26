@@ -84,6 +84,10 @@ const {select, generateTime,paginate,trimString} = require('./helpers/handlebars
 //Set View Engine
 app.engine('handlebars', exphbs({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
 app.set('view engine', 'handlebars');
+Handlebars.registerHelper('trimString', function(passedString){
+    var theString = passedString.substring(0,100);
+    return new Handlebars.SafeString(theString);
+});
 
 
 app.listen(port, () => {
