@@ -41,6 +41,11 @@ module.exports = {
         }
         return output;
 
+    },
+    trimString : function(passedString){
+        var theString = passedString.subString(0,150);
+        return theString;
+
     }
 
 
