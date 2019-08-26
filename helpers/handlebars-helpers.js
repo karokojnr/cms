@@ -42,15 +42,11 @@ module.exports = {
         return output;
 
     },
-    trimString: Handlebars.registerHelper('trimString', function(passedString, startstring, endstring) {
-        var theString = passedString.substring( startstring, endstring );
-        return new Handlebars.SafeString(theString)
-     })
-    // trimString : function(passedString, startString, endString){
-    //     var theString = passedString.subString(startString, endString);
-    //     return theString;
+    trimString : function(passedString){
+        var theString = passedString.subString(0, 100);
+        return theString;
 
-    // }
+    }
 
 
 
