@@ -12,7 +12,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
-const helpers  = require('handlebars-helpers')
+const { Handlebars}  = require('handlebars-helpers');
 const { mongodbUrl } = require('./config/database');
 //const multer = require('multer');
 //const upload = multer({ dest: path.join(__dirname, 'public/uploads')});
@@ -85,7 +85,7 @@ const {select, generateTime,paginate,trimString} = require('./helpers/handlebars
 //Set View Engine
 app.engine('handlebars', exphbs({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
 app.set('view engine', 'handlebars');
-helpers.registerHelper('trimString', function(passedString){
+Handlebars.registerHelper('trimString', function(passedString){
     var theString = passedString.substring(0,100);
     return new Handlebars.SafeString(theString);
 });
