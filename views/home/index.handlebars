@@ -14,8 +14,9 @@
             <div class="card-body">
               <h2 class="card-title">{{title}}</h2>
 
-
+              {{#trimString value 0 300}}
               <p class="card-text">{{body}}</p>
+              {{/trimString}}
 
               <a href="/post/{{slug}}" class="btn btn-primary">Read More &rarr;</a>
             </div>

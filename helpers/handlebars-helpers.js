@@ -42,8 +42,8 @@ module.exports = {
         return output;
 
     },
-    trimString : function(passedString){
-        var theString = passedString.subString(0,150);
+    trimString : function(passedString, startString, endString){
+        var theString = passedString.subString(startString, endString);
         return theString;
 
     }
