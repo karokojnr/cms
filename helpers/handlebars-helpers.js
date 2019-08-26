@@ -42,11 +42,11 @@ module.exports = {
         return output;
 
     },
-    // trimString : function(passedString, start, end){
-    //     var theString = passedString.substring(start, end);
-    //     return theString;
+    trimString : function(passedString, start, end){
+        var theString = passedString.substring(start, end);
+        return theString;
 
-    // }
+    }
 
 
 
