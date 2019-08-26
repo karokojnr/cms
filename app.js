@@ -3,7 +3,8 @@ const chalk = require('chalk');
 //const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
-const exphbs = require('express-handlebars');
+const handlebars = require('handlebars');
+const helpers = require('handlebars-helpers')();
 const mongoose = require('mongoose');
 const bodyParser = require ('body-parser');
 const methodOverride = require('method-override');
@@ -82,8 +83,12 @@ app.use('/admin/comments',comments);
 
 const {select, generateTime,paginate,trimString} = require('./helpers/handlebars-helpers');
 //Set View Engine
-app.engine('handlebars', exphbs({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
+app.engine('handlebars', handlebars({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
 app.set('view engine', 'handlebars');
+Handlebars.registerHelper('trimString', function(passedString) {
+    var theString = passedString.substring(0,150);
+    return new Handlebars.SafeString(theString)
+});
 
 
 

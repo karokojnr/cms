@@ -43,6 +43,7 @@ module.exports = {
 
     },
     trimString : function(passedString){
+        
         var theString = passedString.substring(0, 100);
         return theString;
 
