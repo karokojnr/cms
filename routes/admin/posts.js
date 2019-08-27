@@ -5,11 +5,13 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
-import { uploader, cloudinaryConfig } from './config/cloudinaryConfig'
-import { multerUploads, dataUri } from './middlewares/multerUpload';
+const cloudinary = require('cloudinary');
 
-app.use('*', cloudinaryConfig);
-
+cloudinary.config({
+    cloud_name: 'karokojnr',
+    api_key: '346784416385434',
+    api_secret: 'oinDoqFA3NRMY66lPMV-M5NOCgQ'
+});
 
 router.all('/*', userAuthenticated, (req,res,next) => {
     req.app.locals.layout = 'admin';
@@ -51,34 +53,19 @@ router.post('/create', multerUploads,(req,res) => {
     }else{
 
     let filename = '';
-
     if(!isEmpty(req.files)){
-
-    //let file = req.files.file;
-    let file = dataUri(req).file
+    let file = req.files.file;
     filename = Date.now() + '-' + file.name;
+
+    cloudinary.uploader.upload(file.tempFilePath,(err, result)=>{
+        if(err) return err;
+    });
     // file.mv('./public/uploads/' + filename,(err) => {
     //     if (err) throw err;
     // });
     // }
-    return uploader.upload(file).then((result) => {
-        const image = result.url;
-        return res.status(200).json({
-          messge: 'Your image has been uploded successfully to cloudinary',
-          data: {
-            image
-          }
-        })
-      }).catch((err) => res.status(400).json({
-        messge: 'someting went wrong while processing your request',
-        data: {
-          err
-        }
-      }))
+  
 }
- 
-
-
     // //error -> ./public/uploads
     
     let allowComments =true;
