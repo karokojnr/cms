@@ -41,12 +41,13 @@ module.exports = {
         }
         return output;
     },
-    // trimString : function(passedString){
-        
-    //     let theString = passedString.substring(0, 100);
-    //     return theString;
+    trimString : Handlebars.registerHelper( function(passedString) {
+        var theString = passedString.substring(0,150);
+        return new Handlebars.SafeString(theString)
+    })
+    
 
-    // }
+    
 
 
 
