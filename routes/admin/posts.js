@@ -78,7 +78,7 @@ router.post('/create',(req,res) => {
         category: req.body.category,
         file: resultImage.url
     });
-});
+
     newPost.save()
         .then(savedPost => {
         console.log(savedPost);
@@ -88,6 +88,8 @@ router.post('/create',(req,res) => {
     }).catch(err => {
         console.log(err);
     });
+});
+
     }
 
 });
