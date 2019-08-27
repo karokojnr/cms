@@ -59,7 +59,7 @@ router.post('/create',(req,res) => {
 
     }
     let imageUrl = '';
-    cloudinary.uploader.upload(file.tempFilePath,(err,resultImage)=>{
+    cloudinary.uploader.upload(req.files.files.tempFilePath,(err,resultImage)=>{
         if(err) return err;
 
 
