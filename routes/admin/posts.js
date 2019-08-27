@@ -62,19 +62,20 @@ router.post('/create', (req,res) => {
 
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
-    // cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
-    //     res.send({
-    //         success: true,
-    //         result
-    //     });
-    // });
-
-
-    //error -> ./public/uploads
-    file.mv('./public/uploads/' + filename,(err) => {
-        if (err) throw err;
+    cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
+        res.send({
+            success: true,
+            result
+        });
     });
-    }
+}
+
+
+    // //error -> ./public/uploads
+    // file.mv('./public/uploads/' + filename,(err) => {
+    //     if (err) throw err;
+    // });
+    // }
     let allowComments =true;
     if (req.body.allowComments){
         allowComments = true;
