@@ -158,23 +158,8 @@ router.delete('/:id', (req,res)=>{
             console.log(err);
         });
 });
-router.get('/my-posts', async(req,res)=>{
-    const images = await cloudinary.v2.api.resources({
-        type: "file",
-        prefix: "file"
-        });
-        // Check if files
-        if (!images || images.length === 0) {
-        return res.status(404).json({
-        err: "No files exist"
-        });
-        }
-        // Files exist
-        res.render("files", {
-        images: images
-        });
-
-    Post.find({user: req.user.id})
+router.get('/my-posts',(req,res)=>{
+    cloudinary.vz.a    Post.find({user: req.user.id})
     // !Fetch posts by specific user
     .populate('category')
     .then(postss =>{
