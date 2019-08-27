@@ -159,7 +159,6 @@ router.delete('/:id', (req,res)=>{
         });
 });
 router.get('/my-posts',(req,res)=>{
-    cloudinary.file(file.tempFilePath,{type : fetch});
     Post.find({user: req.user.id})
     // !Fetch posts by specific user
     .populate('category')
