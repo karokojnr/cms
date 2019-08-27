@@ -4,11 +4,16 @@
   "description": "CMS",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node --require @babel/register app.js",
+    "dev": "nodemon --require @babel/register app.js"
   },
   "author": "karoko|jnr|",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
