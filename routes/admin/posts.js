@@ -56,14 +56,11 @@ router.post('/create',(req,res) => {
     if(!isEmpty(req.files)){
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
+    let imageUrl = '';
+    cloudinary.uploader.upload(file.tempFilePath,(resultImage)=>{
+        imageUrl = resultImage.url;
 
-    cloudinary.uploader.upload(file.tempFilePath,(err, file)=>{
-        if(err) return err;
-    }).then(
-        file.mv('./public/uploads' + filename,(err)=>{
-            if (err) return err;
-        })
-    );
+    });
 
     }
     let allowComments =true;
@@ -79,7 +76,7 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: filename
+        file: imageUrl
     });
     newPost.save()
         .then(savedPost => {
