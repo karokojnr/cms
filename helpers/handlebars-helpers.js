@@ -41,7 +41,7 @@ module.exports = {
         }
         return output;
     },
-    trimString : Handlebars.registerHelper( function(passedString) {
+    trimString : registerHelper( function(passedString) {
         var theString = passedString.substring(0,150);
         return new Handlebars.SafeString(theString)
     })
