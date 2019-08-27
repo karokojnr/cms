@@ -35,7 +35,7 @@ router.get('/create', (req,res) => {
 
     });
 });
-router.post('/create', multerUploads,(req,res) => {
+router.post('/create',(req,res) => {
     let errors = [];
     if (!req.body.title){
         errors.push({message : 'please add a title'});
