@@ -5,9 +5,17 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
-import { multerUploads, dataUri } from '../../config/multerConfig';
+const cloudinary = require('cloudinary');
 
+app.use(fileUpload({
+    useTempFiles: true
+}));
 
+cloudinary.config({
+    cloud_name : 'karokojnr',
+    api_key: '346784416385434',
+    api_secret: 'oinDoqFA3NRMY66lPMV-M5NOCgQ'
+});
 router.all('/*', userAuthenticated, (req,res,next) => {
     req.app.locals.layout = 'admin';
     next();
@@ -30,7 +38,7 @@ router.get('/create', (req,res) => {
 
     });
 });
-router.post('/create', multerUploads,(req,res) => {
+router.post('/create', (req,res) => {
     let errors = [];
     if (!req.body.title){
         errors.push({message : 'please add a title'});
@@ -50,30 +58,21 @@ router.post('/create', multerUploads,(req,res) => {
     let filename = '';
 
     if(!isEmpty(req.files)){
-    let file = dataUri(req).file
 
-    //let file = req.files.file;
+    let file = req.files.file;
     filename = Date.now() + '-' + file.name;
-    return uploader.upload(file).then((result) => {
-        const image = result.url;
-        return res.status(200).json({
-            messge: 'Your image has been uploded successfully to cloudinary',
-            data: {
-                image
-            }
-        })
-    }).catch((err) => res.status(400).json({
-        messge: 'someting went wrong while processing your request',
-        data: {
-            err}
-        }))
-    }
+    cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
+        res.send({
+            success: true,
+            result
+        });
+    });
 
     //error -> ./public/uploads
     // file.mv('./public/uploads/' + filename,(err) => {
     //     if (err) throw err;
     // });
-    
+    // }
     let allowComments =true;
     if (req.body.allowComments){
         allowComments = true;
