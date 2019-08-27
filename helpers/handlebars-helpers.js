@@ -40,12 +40,10 @@ module.exports = {
             output += `<li class="page-item"><a href="?page=${options.hash.pages}" class="page-link">Last</a></li>`;
         }
         return output;
-    }
-
-    // },
+    },
     // trimString : function(passedString){
         
-    //     var theString = passedString.substring(0, 100);
+    //     let theString = passedString.substring(0, 100);
     //     return theString;
 
     // }

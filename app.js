@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const morgan = require('morgan');
 const path = require('path');
 const exphbs = require('express-handlebars');
+const Handlebars = require('handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require ('body-parser');
 const methodOverride = require('method-override');
@@ -95,6 +96,10 @@ const {select, generateTime,paginate,trimString} = require('./helpers/handlebars
 //Set View Engine
 app.engine('handlebars', exphbs({defaultLayout : 'home', helpers : {select : select, generateTime: generateTime, paginate: paginate,trimString: trimString}}));
 app.set('view engine', 'handlebars');
+Handlebars.registerHelper('trimString', function(passedString) {
+    var theString = passedString.substring(0,150);
+    return new Handlebars.SafeString(theString)
+});
 
 
 
