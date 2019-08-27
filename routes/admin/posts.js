@@ -8,9 +8,9 @@ const { userAuthenticated } = require('../../helpers/authentication');
 const cloudinary = require('cloudinary');
 const app = express();
 
-app.use(fileUpload({
-    useTempFiles: true
-}));
+// app.use(fileUpload({
+//     useTempFiles: true
+// }));
 
 cloudinary.config({
     cloud_name : 'karokojnr',
