@@ -6,6 +6,7 @@ const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
 const cloudinary = require('cloudinary');
+const app = express();
 
 app.use(fileUpload({
     useTempFiles: true
