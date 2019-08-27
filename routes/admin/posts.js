@@ -56,13 +56,13 @@ router.post('/create',(req,res) => {
     if(!isEmpty(req.files)){
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
+
+    }
     let imageUrl = '';
     cloudinary.uploader.upload(file.tempFilePath,(err,resultImage)=>{
         if(err) return err;
 
-    });
 
-    }
     let allowComments =true;
     if (req.body.allowComments){
         allowComments = true;
@@ -76,8 +76,9 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: resultImage.uur
+        file: resultImage.url
     });
+});
     newPost.save()
         .then(savedPost => {
         console.log(savedPost);
