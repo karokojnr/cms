@@ -5,7 +5,7 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
-
+import { multerUploads, dataUri } from '../../config/multerConfig';
 
 
 router.all('/*', userAuthenticated, (req,res,next) => {
@@ -30,7 +30,7 @@ router.get('/create', (req,res) => {
 
     });
 });
-router.post('/create', (req,res) => {
+router.post('/create', multerUploads,(req,res) => {
     let errors = [];
     if (!req.body.title){
         errors.push({message : 'please add a title'});
@@ -50,15 +50,30 @@ router.post('/create', (req,res) => {
     let filename = '';
 
     if(!isEmpty(req.files)){
+    let file = dataUri(req).file
 
-    let file = req.files.file;
+    //let file = req.files.file;
     filename = Date.now() + '-' + file.name;
+    return uploader.upload(file).then((result) => {
+        const image = result.url;
+        return res.status(200).json({
+            messge: 'Your image has been uploded successfully to cloudinary',
+            data: {
+                image
+            }
+        })
+    }).catch((err) => res.status(400).json({
+        messge: 'someting went wrong while processing your request',
+        data: {
+            err}
+        }))
+    }
 
     //error -> ./public/uploads
-    file.mv('./public/uploads/' + filename,(err) => {
-        if (err) throw err;
-    });
-    }
+    // file.mv('./public/uploads/' + filename,(err) => {
+    //     if (err) throw err;
+    // });
+    
     let allowComments =true;
     if (req.body.allowComments){
         allowComments = true;
