@@ -57,7 +57,7 @@ router.post('/create',(req,res) => {
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
 
-    cloudinary.uploader.upload(file.tempFilePath,(err, file)=>{
+    cloudinary.uploader.upload('' + file.tempFilePath,(err, file)=>{
         if(err) return err;
     });
   
@@ -76,7 +76,7 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: req.body.file
+        file: file
     });
     newPost.save()
         .then(savedPost => {
