@@ -76,7 +76,9 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: req.body.upload
+        file: cloudinary.uploader.upload(file.tempFilePath,(err, file)=>{
+            if(err) return err;
+        })
     });
     newPost.save()
         .then(savedPost => {
