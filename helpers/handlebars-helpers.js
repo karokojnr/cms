@@ -45,10 +45,4 @@ module.exports = {
         var theString = passedString.substring(0,150);
         return theString;
     }
-    
-
-    
-
-
-
 }
