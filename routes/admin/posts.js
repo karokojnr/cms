@@ -5,7 +5,7 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
     cloud_name: 'karokojnr',

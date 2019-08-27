@@ -29,7 +29,9 @@ mongoose.connect( mongodbUrl, { useNewUrlParser: true })
 
 
 //Upload middleware
-app.use(upload());
+app.use(upload({
+    useTempFile: true
+}));
 
 app.use(session({
     resave: true,
