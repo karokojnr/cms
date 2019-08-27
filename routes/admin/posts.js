@@ -68,7 +68,7 @@ router.post('/create', (req,res) => {
     //         result
     //     });
     // });
-}
+
 
     //error -> ./public/uploads
     file.mv('./public/uploads/' + filename,(err) => {
