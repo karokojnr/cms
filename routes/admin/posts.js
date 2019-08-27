@@ -82,7 +82,7 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: file
+        file: req.body.file
     });
     newPost.save()
         .then(savedPost => {
