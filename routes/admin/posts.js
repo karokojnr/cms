@@ -68,6 +68,7 @@ router.post('/create', (req,res) => {
             result
         });
     });
+}
 
     //error -> ./public/uploads
     // file.mv('./public/uploads/' + filename,(err) => {
@@ -99,7 +100,7 @@ router.post('/create', (req,res) => {
         console.log(err);
     });
     }
-}
+
 });
 router.get('/edit/:id', (req,res) => {
     //res.send(req.params.id);
