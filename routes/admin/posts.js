@@ -6,11 +6,18 @@ const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
 const cloudinary = require('cloudinary');
+const multer = require('multer');
 const app = express();
 
-// app.use(fileUpload({
-//     useTempFiles: true
-// }));
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, '/public/uploads')
+    },
+    filename: function(req, file, cb) {
+      console.log(file)
+      cb(null, file.originalname)
+    }
+  });
 
 cloudinary.config({
     cloud_name : 'karokojnr',
@@ -62,9 +69,17 @@ router.post('/create', (req,res) => {
 
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
-    cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
-        if (err) return err;
-    });
+
+    const file = multer({ storage }).single('file')
+  file(req, res, function(err) {
+    if (err) {
+      return res.send(err)
+    }
+    res.json(req.file)
+  });
+    // cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
+    //     if (err) return err;
+    // });
 }
 
 
