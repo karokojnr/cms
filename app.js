@@ -14,21 +14,9 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 const { mongodbUrl } = require('./config/database');
+import { uploader, cloudinaryConfig } from './config/cloudinaryConfig'
+import { multerUploads, dataUri } from './middlewares/multerUpload';
 const app = express();
-
-
-
-// const multerConf = {
-//     store : multer.diskStorage({
-//         destination : function(req,res,next){
-//             next(null,'./public/uploads');
-//         },
-//         filename: function(req,file,next){
-//             console.log(file);
-//         }
-//     })
-   
-// }
 
 
 
@@ -42,7 +30,7 @@ mongoose.connect( mongodbUrl, { useNewUrlParser: true })
     }).catch(err => console.log('Could not connect'));
 
 
-
+app.use('*', cloudinaryConfig);
 //Upload middleware
 app.use(upload());
 

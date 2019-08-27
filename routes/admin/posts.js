@@ -5,25 +5,12 @@ const Category = require('../../models/Category');
 const { isEmpty, uploadDir } = require('../../helpers/upload-helper');
 const fs = require('fs');
 const { userAuthenticated } = require('../../helpers/authentication');
-const cloudinary = require('cloudinary');
-const multer = require('multer');
-const app = express();
+import { uploader, cloudinaryConfig } from './config/cloudinaryConfig'
+import { multerUploads, dataUri } from './middlewares/multerUpload';
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, '/public/uploads')
-    },
-    filename: function(req, file, cb) {
-      console.log(file)
-      cb(null, file.originalname)
-    }
-  });
+app.use('*', cloudinaryConfig);
 
-cloudinary.config({
-    cloud_name : 'karokojnr',
-    api_key: '346784416385434',
-    api_secret: 'oinDoqFA3NRMY66lPMV-M5NOCgQ'
-});
+
 router.all('/*', userAuthenticated, (req,res,next) => {
     req.app.locals.layout = 'admin';
     next();
@@ -46,7 +33,7 @@ router.get('/create', (req,res) => {
 
     });
 });
-router.post('/create', (req,res) => {
+router.post('/create', multerUploads,(req,res) => {
     let errors = [];
     if (!req.body.title){
         errors.push({message : 'please add a title'});
@@ -68,27 +55,32 @@ router.post('/create', (req,res) => {
     if(!isEmpty(req.files)){
 
     //let file = req.files.file;
-    const file = multer({ storage }).single('file')
-
+    let file = dataUri(req).file
     filename = Date.now() + '-' + file.name;
-
-  file(req, res, function(err) {
-    if (err) {
-      return res.send(err)
-    }
-    res.json(req.file)
-  });
-    // cloudinary.uploader.upload(file.tempFilePath, (err,result)=>{
-    //     if (err) return err;
-    // });
-}
-
-
-    // //error -> ./public/uploads
     // file.mv('./public/uploads/' + filename,(err) => {
     //     if (err) throw err;
     // });
     // }
+    return uploader.upload(file).then((result) => {
+        const image = result.url;
+        return res.status(200).json({
+          messge: 'Your image has been uploded successfully to cloudinary',
+          data: {
+            image
+          }
+        })
+      }).catch((err) => res.status(400).json({
+        messge: 'someting went wrong while processing your request',
+        data: {
+          err
+        }
+      }))
+}
+ 
+
+
+    // //error -> ./public/uploads
+    
     let allowComments =true;
     if (req.body.allowComments){
         allowComments = true;
