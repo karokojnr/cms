@@ -57,8 +57,8 @@ router.post('/create',(req,res) => {
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
     let imageUrl = '';
-    cloudinary.uploader.upload(file.tempFilePath,(resultImage)=>{
-        imageUrl = resultImage.url;
+    cloudinary.uploader.upload(file.tempFilePath,(err,resultImage)=>{
+        if(err) return err;
 
     });
 
@@ -76,7 +76,7 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: imageUrl
+        file: resultImage.uur
     });
     newPost.save()
         .then(savedPost => {
