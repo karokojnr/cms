@@ -97,6 +97,7 @@ router.post('/create', (req,res) => {
     }).catch(err => {
         console.log(err);
     });
+    }
 }
 });
 router.get('/edit/:id', (req,res) => {
