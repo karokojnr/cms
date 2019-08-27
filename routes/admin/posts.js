@@ -59,15 +59,9 @@ router.post('/create',(req,res) => {
 
     cloudinary.uploader.upload(file.tempFilePath,(err, file)=>{
         if(err) return err;
-        file
     });
-    // file.mv('./public/uploads/' + filename,(err) => {
-    //     if (err) throw err;
-    // });
-    // }
   
 }
-    // //error -> ./public/uploads
     
     let allowComments =true;
     if (req.body.allowComments){
@@ -82,7 +76,7 @@ router.post('/create',(req,res) => {
         allowComments: allowComments,
         body: req.body.body,
         category: req.body.category,
-        file: req.body.file
+        file: req.body.upload
     });
     newPost.save()
         .then(savedPost => {
