@@ -67,10 +67,11 @@ router.post('/create', (req,res) => {
 
     if(!isEmpty(req.files)){
 
-    let file = req.files.file;
+    //let file = req.files.file;
+    const file = multer({ storage }).single('file')
+
     filename = Date.now() + '-' + file.name;
 
-    const file = multer({ storage }).single('file')
   file(req, res, function(err) {
     if (err) {
       return res.send(err)
