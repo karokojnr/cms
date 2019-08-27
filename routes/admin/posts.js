@@ -56,12 +56,14 @@ router.post('/create',(req,res) => {
     if(!isEmpty(req.files)){
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
-    file.mv('./public/uploads' + filename,(err)=>{
-        if (err) return err;
-    })
+
     cloudinary.uploader.upload(file.tempFilePath,(err, file)=>{
         if(err) return err;
-    });
+    }).then(
+        file.mv('./public/uploads' + filename,(err)=>{
+            if (err) return err;
+        })
+    );
 
     }
     let allowComments =true;
