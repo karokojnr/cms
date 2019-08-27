@@ -57,7 +57,7 @@ router.post('/create',(req,res) => {
     let file = req.files.file;
     filename = Date.now() + '-' + file.name;
 
-    cloudinary.uploader.upload('file',(err, result)=>{
+    cloudinary.uploader.upload(file.tempFilePath,(err, result)=>{
         if(err) return err;
     });
     // file.mv('./public/uploads/' + filename,(err) => {

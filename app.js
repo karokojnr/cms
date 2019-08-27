@@ -30,7 +30,7 @@ mongoose.connect( mongodbUrl, { useNewUrlParser: true })
 
 //Upload middleware
 app.use(upload({
-    useTempFile: true
+    useTempFiles: true
 }));
 
 app.use(session({
