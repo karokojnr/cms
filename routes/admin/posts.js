@@ -173,7 +173,7 @@ router.get('/my-posts', async(req,res)=>{
         res.render("files", {
         images: images
         });
-        });
+
     Post.find({user: req.user.id})
     // !Fetch posts by specific user
     .populate('category')
