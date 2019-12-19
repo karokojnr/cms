@@ -4,7 +4,7 @@
   "description": "CMS",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
     "build": "gulp build",
     "build-prod": "NODE_ENV=production gulp build",
     "watch": "gulp watch"
