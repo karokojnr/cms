@@ -4,10 +4,12 @@
 - Express.js <br>
 - Mongodb <br>
 - Express Handlebars <br>
+- Hosted on Google Cloud Platform VM <br>
+
 
 ## Details
 
-Click here to view the [CMS](http://desolate-inlet-91786.herokuapp.com).
+Click here to view the [CMS](http://104.196.52.113/).
 
 
 ## Contributing
