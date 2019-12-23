@@ -9,7 +9,7 @@
 
 ## Details
 
-Click here to view the [CMS](http://104.196.52.113/).
+Click here to view the <a href="http://104.196.52.113/" target="_blank"> CMS </a>.
 
 
 ## Contributing
